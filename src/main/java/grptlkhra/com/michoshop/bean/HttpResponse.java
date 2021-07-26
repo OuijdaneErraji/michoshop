@@ -8,7 +8,7 @@ import java.util.Date;
 public class HttpResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "MM-dd-yyyy hh:mm:ss",timezone = "Casablanca/Morocco")
     private Date timeSamp;
-    private int httpStatusCode; // 200,100,400
+    private int httpStatusCode; // 200,100,400,500
     private HttpStatus httpStatus;
     private String reason; // Http Reason (Libelle d Http responce)
     private String message; // Developper Msg

@@ -1,12 +1,14 @@
 package grptlkhra.com.michoshop.bean;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Arrays;
 import java.util.Collection;
 
 @Entity
@@ -20,6 +22,24 @@ public class User implements UserDetails {
     private String lastname;
     private String phone;
     private String[] authorities;
+
+    public void setAuthorities(String[] authorities) {
+        this.authorities = authorities;
+    }
+
+    public User(long id, String username, String password, String email, String firstname, String lastname, String phone, String[] authorities) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.authorities = authorities;
+    }
+
+    public User() {
+    }
 
     public long getId() {
         return id;
@@ -69,10 +89,9 @@ public class User implements UserDetails {
         this.phone = phone;
     }
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Arrays.stream(this.authorities).map(new SimpleGrantedAuthority("ROLE_"+));
         return null;
     }
 
@@ -105,4 +124,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
