@@ -1,6 +1,7 @@
 package grptlkhra.com.michoshop.config;
 
 import grptlkhra.com.michoshop.consts.SecurityConsts;
+import grptlkhra.com.michoshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +18,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserService userService;
 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super(auth);
+       auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
